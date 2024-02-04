@@ -2,8 +2,8 @@
 session_start();
 
 // Check if the user is logged in, if not, redirect to login page
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: adminsignin.php");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signin.php");
     exit();
 }
 
@@ -45,7 +45,7 @@ if ($result) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <title>Admin Dashboard</title>
+    <title>Staff Dashboard</title>
     <!-- Add your stylesheet link here -->
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
@@ -75,7 +75,7 @@ if ($result) {
         /* Additional styles for the dropdown */
         .dropdown {
         display: inline-block;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         margin-top: 10px;
         }
 
@@ -118,7 +118,8 @@ if ($result) {
     </style>
 </head>
 <body>
-    <?php include('includeadmin\leftnavbar.php'); ?>
+    <?php include('includestaff\staffheader.php'); ?>
+    <?php include('includestaff\leftnavbar.php'); ?>
     <main>
         <h2>Staff Movement Records</h2>
         
@@ -157,8 +158,7 @@ if ($result) {
                     echo "<td>" . (isset($row['EndDate']) ? $row['EndDate'] : '') . "</td>";
                     echo "<td>" . (isset($row['Place']) ? $row['Place'] : '') . "</td>";
                     echo "<td>" . (isset($row['Program']) ? $row['Program'] : '') . "</td>";
-                    echo "<td><img src='../staff/includestaff/uploads/" . (isset($row['MovementPicture']) ? $row['MovementPicture'] : '') . "' alt='Movement Picture' style='max-width: 100px;'></td>";
-
+                    echo "<td><img src='" . (isset($row['MovementPicture']) ? $row['MovementPicture'] : '') . "' alt='Movement Picture' style='max-width: 100px;'></td>";
                     echo "</tr>";
                 }
                 ?>
